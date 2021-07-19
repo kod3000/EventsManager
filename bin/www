@@ -1,0 +1,20 @@
+var app = require('../app');
+var http = require('http');
+var moment = require('moment');
+
+var port = 8080;
+app.set('port', port);
+
+var server = http.createServer(app);
+server.listen(port);
+
+server.on("listening", () => {
+    console.log("Events Server started on " + moment().format('MMMM Do YYYY, h:mm:ss a'));
+    console.log("Running at... %s:%s", server.address().address, server.address().port);
+});
+
+
+process.on('unhandledRejection', error => {
+    // Will print "unhandledRejection err is not defined"
+    console.log('unhandledRejection', error.message);
+});

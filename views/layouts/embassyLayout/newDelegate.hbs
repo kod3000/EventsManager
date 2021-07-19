@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{template}}</title>
+    <link rel="stylesheet" href="/static/style.css" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://jaysalvat.github.io/vegas/releases/latest/vegas.min.js"></script>
+    <link rel="stylesheet" href="https://jaysalvat.github.io/vegas/releases/latest/vegas.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" />
+
+    <style>
+        body {
+
+            margin: 20px;
+        }
+
+        .centerDivContainer {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            left: 50%;
+            top: 20%;
+            margin-left: -170px;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            letter-spacing: 2px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="centerDivContainer">
+        {{{body}}}
+    </div>
+    <!-- give em some client side JS -->
+    <script type="text/javascript" src="/static/js/embassyDelegate.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
+</body>
+
+</html>

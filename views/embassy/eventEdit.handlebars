@@ -1,0 +1,16 @@
+<!-- page for editing a single event -->
+edit existing event
+<form method="POST" action="/api/events/{{dataEvent._id}}"  style="margin-bottom:5px;margin-top:5px;">
+Title : <input type="text" name="title" value="{{dataEvent.title}}" />
+<br />
+Capacity : <input type="number" name="seatCapacity" value="{{dataEvent.seatCapacity}}" />
+<br />
+
+Event Date :<input type="date" name="eventDate" value="{{dataEvent.eventDate}}" />
+<br />
+<input type="text" style="display:none;" name="id" value="{{dataEvent._id}}" ></input>
+<input type="text" style="display:none;" name="eventNum" value="{{dataEvent.eventNum}}" ></input>
+
+<button type="submit">Save</button>
+<a href="/embassy/lobby/">Cancel</a>
+<form>

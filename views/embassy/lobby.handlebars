@@ -1,0 +1,79 @@
+<!-- embassy lobby -->
+<div style="text-align:right;display:block;">
+  <a href="/api/ambassadors/logout">logout {{simpleName}}</a>
+
+</div>
+
+<div style="text-align:left;display:block;" id="statsEvent">
+  <!-- embassy main lobby -->
+
+  <button id="showCreate">+</button> create event
+  <br />
+  <br />
+  <span style="display:block;">
+    Stats: <br /><br />
+    <a href="/api/events/" style="text-decoration: none;color: black;margin:10px;display:block;"><b style="padding:5px;border:1px solid black;">{{numberEvents}}</b> Event(s).</a>
+    <br />
+    <a href="/api/nation/" style="text-decoration: none;color: black;margin:10px;display:block;"><b style="padding:5px;border:1px solid black;">{{numberClients}}</b> Client(s) registered .</a>
+  </span>
+</div>
+
+<div style="   text-align: left;
+  display: block;
+  margin-top: 10px;
+  max-height: 250px;
+  overflow: hidden;
+  overflow-y: scroll;
+  border: 2px solid whitesmoke;
+  padding:20px;
+  border-radius: 5px;display:none;" id="createEvent">
+  <!-- embassy action create event  -->
+  <form method="POST" action="/api/events" enctype="multipart/form-data" style="margin-bottom:5px;margin-top:5px;">
+
+    <input type="text" name="title" placeholder="event name" />
+    <input type="text" name="seatCapacity" placeholder="capacity" />
+    <br />
+    <br />
+    <input type="file" name="image" />
+    <br />
+    <br />
+    <br />
+    <button style=" cursor: pointer;   margin-top: -10px;
+  left: 0px;
+  position: relative;
+  background-color: #5090f0;" type="submit"> Create</button>
+    <button id="cancelCreate" type="reset">Cancel</button>
+  </form>
+</div>
+
+
+<div style="    text-align: left;
+    display: block;
+    margin-top: 10px;
+    max-height: 250px;
+    overflow: hidden;
+    overflow-y: scroll;
+    border: 2px solid whitesmoke;
+    border-radius: 5px;" id="listsEvent">
+  <!-- embassy show list of events created  -->
+
+  <br />
+
+  {{#each dataEvents}}
+    <span style="display:block;margin:20px;">
+
+      {{eventNum}}
+      <img src="{{mainImage.imageurl}}" align="top" style="max-width:30px" />
+
+      <b>{{title}}</b>
+      {{seatCapacity}}<span style="min-width:30px;"></span> <a href="/embassy/edit/event/{{eventNum}}" style="    text-decoration: none;
+    color: black;
+    background-color: #0000ff54;
+    font-size: xx-small;
+    padding: 3px;
+    border-radius: 2px;">Edit</a>
+
+
+    </span>
+  {{/each}}
+</div>

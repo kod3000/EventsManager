@@ -1,0 +1,187 @@
+<html>
+<head>
+  <title>API Test File</title>
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js"
+          integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+          crossorigin="anonymous"></script>
+  <script>
+      "use strict";
+      $.when($.ready).then(() => {
+
+          let api = "http://localhost:8080/api/events";
+
+          let error = (err, el) => {
+              if (err.responseJSON)
+                el.text(`Failed:  ${err.responseJSON.name} ${err.responseJSON.message}`);
+              else el.text(err);
+              throw err;
+          };
+
+          let listRecords = async function () {
+              const tgt = $("#listResponse");
+              let records;
+              try {
+                  records = await $.ajax({url: api})
+              } catch (err) {
+                  error(err, tgt);
+              }
+              console.log(records);
+              tgt.text(`Success: Found ${records.length} records`);
+          };
+
+          let confirmCreated = async function (recordId) {
+              const tgt = $("#confirmCreated");
+              let records;
+              try {
+                  records = await $.ajax({url: api});
+              } catch (err) {
+                  error(err, tgt);
+              }
+              let message = records.find((el) => {
+                  return el._id === recordId
+              })
+                  ? "Success: record Id found"
+                  : "Failure: record Id not found";
+              tgt.text(message);
+          };
+
+          let createRecord = async function () {
+              const tgt = $("#createResponse");
+              let record;
+              try {
+                  record = await $.ajax({
+                      url: api,
+                      method: 'POST',
+                      data: {
+                          "title": "A test event",
+                          "seatCapacity": 40
+                      }
+                  });
+                  console.log(record);
+                  tgt.text(`Success: Created record with id ${record._id}`);
+                  return record._id;
+
+              } catch (err) {
+                  error(err, tgt);
+              }
+          };
+
+          let getRecord = async function (recordId) {
+              const tgt = $("#retrieveResponse");
+              let record;
+              try {
+                  record = await $.ajax({url: `${api}/${recordId}`})
+                  tgt.text(`Success: Retrieved record by lookup on id ${recordId}`);
+                  return record;
+              } catch (err) {
+                  error(err, tgt);
+              }
+          };
+
+          let updateRecord = async function (record) {
+              const tgt = $("#updateResponse");
+              console.dir(record);
+              record.seatCapacity = 50;
+              let revised;
+              try {
+                  revised = await $.ajax({url: `${api}/${record._id}`, method: 'PUT', data: record})
+                  console.log(revised);
+                  let message = revised.seatCapacity == record.seatCapacity
+                      ? `Success: Updated record with id ${record._id}`
+                      : "Failure: Unexpected value reported for seatCapacity property";
+                  tgt.text(message);
+              } catch (e) {
+                  error(e, tgt);
+              }
+          };
+
+          let deleteRecord = async function (recordId) {
+              console.log("DELETE running");
+              const tgt = $("#deleteResponse");
+              let record;
+              try {
+                  record = await $.ajax({url: `${api}/${recordId}`, method: 'DELETE'})
+              } catch (e) {
+                  error(e, tgt);
+              }
+              console.log(record);
+              tgt.text(`Success: Deleted record with id ${recordId}`);
+          };
+
+          let confirmDelete = async function (recordId) {
+              const tgt = $("#confirmDeleteResponse");
+              let records;
+              try {
+                  records = await $.ajax({url: api});
+              } catch (e) {
+                  err(e, tgt);
+              }
+              console.log(records);
+              let message = !(records.find((el) => el._id === recordId))
+                  ? "Success: record does not appear in listing"
+                  : "Failure: record still appears in listing";
+              tgt.text(message);
+          };
+
+          async function execute() {
+              try {
+                  console.log("********************** LIST");
+                  await listRecords();
+
+                  console.log("********************** CREATE");
+                  let recordId = await createRecord();
+
+                  console.log("********************** GET");
+                  let record = await getRecord(recordId);
+                  console.dir(record);
+
+                  console.log("********************** UPDATE");
+                  await updateRecord(record);
+
+                  console.log("********************** DELETE");
+                  await deleteRecord(recordId);
+
+                  console.log("********************** CONFIRM");
+                  await confirmDelete(recordId);
+              } catch (e) {
+                  console.error("Test failed");
+                  console.error(e);
+              }
+          }
+
+          execute();
+      });
+
+  </script>
+</head>
+<body>
+  <h1>API Test Results</h1>
+  <table>
+    <tr>
+      <td>List Records</td>
+      <td><span id="listResponse"></span></td>
+    </tr>
+    <tr>
+      <td>Create Record</td>
+      <td id="createResponse"></td>
+    </tr>
+    <tr>
+      <td>Retrieve Record</td>
+      <td id="retrieveResponse"></td>
+    </tr>
+    <tr>
+      <td>Update Record</td>
+      <td id="updateResponse"></td>
+    </tr>
+    <tr>
+      <td>Delete Record</td>
+      <td id="deleteResponse"></td>
+    </tr>
+    <tr>
+      <td>Confirm Record Deletion</td>
+      <td id="confirmDeleteResponse"></td>
+    </tr>
+  </table>
+
+</body>
+</html>

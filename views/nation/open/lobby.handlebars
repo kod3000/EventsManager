@@ -1,0 +1,85 @@
+<!-- here we say what events the user is signed up for.. -->
+<span style="position: relative;
+    top: -20px;
+    text-align: right;
+    display: block;">Welcome {{simpleName}} <a href="/" style="    text-decoration: none;
+    color: white;
+    background-color: red;
+    padding: 3px;
+    border-radius: 4px;
+    font-size: xx-small;
+    margin-right: -30px;">SignOut</a></span>
+
+<div style="    max-height: 180px;
+    max-width: 480px;
+    width: 300px;
+    display: block;
+    text-align: center;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    margin: 20px;
+    border: 2px solid #00000005;
+    padding-top: 20px;
+    padding-bottom: 0px;">
+  <span style="    position: fixed;
+    margin-top: -32px;
+    margin-left: -145px;
+    color: #bdbdbd;">Reserved Events [{{numberOfReservations}}]</span>
+  <div style="width:{{giveWidth}}px;     height: 65px;
+    padding: 20px;overflow:hidden;max-width:{{giveMaxWidth}}px;padding-bottom:0px;">
+    {{#each Reservations}}
+      <span style="   text-align:right;
+      min-width: 180px;
+      width: 100%;
+      min-height: 40px;padding:10px;">
+        <span style="   display:contents;   padding: 20px;
+      padding-right: 40px;
+      padding-left: 40px;    cursor: default;">{{title}} </span>
+        <span style="  display:inline;  padding: 20px;
+      background-color: whitesmoke;    cursor: pointer;" onclick="navToReservation({{eventNum}})">view</span>
+      </span>
+
+
+    {{/each}}
+  </div>
+</div>
+
+<br />
+<br />
+
+<div style="max-height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+    width: 300px;
+    padding-right: 40px;
+    padding-top:20px;">
+  <span style="    position: fixed;
+margin-top: -32px;
+margin-left: -120px;
+color: #bdbdbd;">Avaliable Events [{{avaliableEvents}}]</span>
+  <br />
+
+  {{#each OpenEvents}}
+    <span style="   text-align:right; display: block;
+    min-width: 180px;
+    width: 100%;
+    min-height: 40px;padding:10px;">
+      <span style="   display:contents;   padding: 20px;
+    padding-right: 40px;
+    padding-left: 40px;    cursor: default;">{{title}} </span>
+      <span style="  display:inline;  padding: 20px;
+    background-color: whitesmoke;   cursor: pointer;" onclick="navToEvent({{eventNum}})">reserve</span>
+    </span>
+  {{/each}}
+</div>
+<script>
+  function navToReservation(tmp) {
+
+    window.location = "/nation/open/{{simpleName}}/event/" + tmp;
+  }
+
+  function navToEvent(tmp) {
+
+    window.location = "/nation/event/" + tmp + "/reserve";
+  }
+</script>

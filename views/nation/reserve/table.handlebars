@@ -1,0 +1,52 @@
+<form method="POST" action="/api/reserve/"  style="margin-bottom:5px;margin-top:5px;">
+<b style="display:block; margin-bottom:20px;">{{eventInfo.title}}<br />{{niceDate}}</b>
+<br />
+<div id="partySize">
+<div id="partyFavors" >
+        <div style="margin-bottom:10px;    background-color: #f9f9f96e;padding: 10px;display: block;"><span style="text-align: center;font-size:15px;" class="form-text">How many people are in your Party?</span></div>
+        <div>
+            <select id="people" name="party" class="form-textbox form-textbox-text" style="max-width: 60px;"></select>
+        </div>
+
+    </div>
+</div>
+<div>
+<span style="text-align: center;display:block;" class="form-text" id="greeting"  >&& how many are <b style="color: #7c9e7ce8;">vegetarian</b>?</span>
+
+<br />
+<br />
+<span style="display:block;">
+<select id="peopleVeg" name="vegan" class="form-textbox form-textbox-text" style="max-width: 80px;text-align:center;"><option value="0">0</option><option value="1">1</option></select>
+</span>
+</div>
+<div style="display:none;">
+  <input type="text" name="eventNum" value="{{eventInfo.eventNum}}">
+
+  <input type="text" name="userId" value="{{userId}}">
+
+  <input type="text" name="title" value="{{simpleName}}">
+</div>
+
+
+<div style="margin-top:40px;">
+  <br />
+<button style="background-color: #53d653;
+    padding: 5px;
+    min-width: 125px;
+    text-align:center;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 2px;cursor:pointer;" type="submit" >Confirm </button>
+<button style="background-color: #f57575;
+    padding: 5px;
+    min-width: 125px;
+text-align:center;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 2px;cursor:pointer;" type="reset" onclick="javascript:window.location.href='/nation/open/{{simpleName}}/events'" > Cancel </button>
+
+</div>
+
+</form>
