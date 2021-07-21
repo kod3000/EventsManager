@@ -164,3 +164,8 @@ All of the following listed above is done by the application behind the scenes.
 ## _Developer Notes_
 
 Some of the api uses hacks to redirect the user back to the HTML system and still allows for api calls to be made with json response. 80% of the Events api is edited with Administration in mind. The other 20% is the clients themselves making changes as they sign up for each event.
+
+
+## Donate
+
+![btc](https://github.com/kod3000/EventsManager/blob/64eb6657fe4eecff1fe80509828bdabdc0250580/public/img/bitcoin.png) Bitcoin: `34zin8qyLHUcaN1E9veNoorPujaRVnr6ZZ`
