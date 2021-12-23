@@ -1,5 +1,8 @@
 # Events Manager
 
+*** DEV NOTE : THIS BRANCH DOES NOT CONTAIN ANY ANGULAR
+
+
 Running the application in Development Mode
 
     npm run-script dev
